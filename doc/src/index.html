@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src API documentation</title>
+<meta name="description" content="Source code for our study of the paper *Leveraging the Exact Likelihood of Deep Latent
+Variable Models* by Pierre-Alexandre Mattei and Jes Frellsen …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>src</code></h1>
+</header>
+<section id="section-intro">
+<p>Source code for our study of the paper <em>Leveraging the Exact Likelihood of Deep Latent
+Variable Models</em> by Pierre-Alexandre Mattei and Jes Frellsen.</p>
+<h1 id="study-of-the-exact-likelihood-of-deep-latent-variable-models">Study of the Exact Likelihood of Deep Latent Variable Models</h1>
+<p>In this project, we implemented different Auto Encoder architectures, such as Variational Auto Encoder. Then, we implemented data imputation techniques as described by Kingma and Welling in their 2014 paper <a href="https://arxiv.org/abs/1312.6114"><em>Auto-Encoding Variational Bayes</em></a> and by Mattei and Frellsen in their 2018 paper <a href="https://arxiv.org/abs/1802.04826"><em>Leveraging the Exact Likelihood of Deep Latent Variable Models</em></a>. Our simple implementation aimed at comparing the data imputation abilities of different sampling procedures.</p>
+<p>Please refer to the following sections for more information about the package usage:</p>
+<ol>
+<li><a href="#some-results">Some results</a></li>
+<li><a href="#installation-instructions">Installation</a></li>
+<li><a href="#package-description">Description</a></li>
+<li><a href="#package-usage">Usage via command lines</a></li>
+<li><a href="#documentation">Documentation</a></li>
+</ol>
+<h2 id="some-results">Some Results</h2>
+<p>Here, we show the ability of Variational Auto Encoder to reconstruct images and impute missing data.</p>
+<p>First, we plot original images above reconstructed ones using a trained Variational Auto Encoder.</p>
+<p><img alt="rec" src="doc/reconstruction.png"></p>
+<p>Then, we plot original images above noisy images where a proportion of pixels are set to random values. Different sampling procedures are compared for data imputation.</p>
+<p><img alt="mar" src="doc/missing_at_random.png"></p>
+<p>Finally, we plot original images above noisy images where a proportion of the upper half of the image is set to random values. Different sampling procedures are compared for data imputation.</p>
+<p><img alt="muh" src="doc/missing_upper_half.png"></p>
+<h2 id="installation-instructions">Installation instructions</h2>
+<p>In order to use our package and run your own experiments, we advise you to set up a virtual environment. </p>
+<p>You will need Python 3 and the <em>virtualenv</em> package:</p>
+<pre><code>pip3 install virtualenv
+</code></pre>
+<p>Then, create your virtual environment and switch to it:</p>
+<pre><code>python3 -m venv venv
+
+source venv/bin/activate (Linux)
+.\venv\Scripts\Activate.ps1 (Windows PowerShell)
+</code></pre>
+<p>Finally, install all the requirements:</p>
+<pre><code>pip3 install -r requirements.txt (Linux)
+pip3 install -r .\requirements.txt --extra-index-url &lt;https://download.pytorch.org/whl/cu117&gt; (Windows)
+</code></pre>
+<p><em>Note</em>: Tested on Linux with Python 3.10.8 and on Windows with Python 3.9.5, with CUDA 11.8+. For Windows, you might also need to install the corresponding CUDA Toolkit.</p>
+<h2 id="package-description">Package description</h2>
+<p>Below, we give a brief tree view of our package.</p>
+<pre><code>.
+├── doc  # contains a generated documentation of src/ in html
+├── src  # source code
+|   ├── nn  # Auto Encoder architectures
+|   |   ├── __init__.py
+|   |   ├── auto_encoder.py
+|   |   └── variational_auto_encoder.py
+|   ├── sampling  # sampling techniques for data imputation
+|   |   ├── __init__.py
+|   |   ├── iterative.py  # iterative imputing with *scikit-learn*
+|   |   ├── metropolis_hastings_w_gibbs.py
+|   |   ├── pseudo_gibbs.py
+|   |   └── single_pass.py  # direct reconstruction
+|   ├── __init__.py
+|   ├── training.py  # main file to train and evaluate Auto Encoders
+|   ├── imputation.py  # main file to perform data imputation
+|   └── utils.py
+├── README.md
+└── requirements.txt  # contains the required Python packages to run our files
+</code></pre>
+<h2 id="package-usage">Package usage</h2>
+<p>Our implementation of Auto Encoder architectures can be found under the <em>src/nn</em> folder. They can take as parameters an input dimension (which is usually of 784 for MNIST) and an encoding dimension which is by default of 32.</p>
+<h3 id="model-training">Model training</h3>
+<p>You can either train an Auto Encoder by yourself or use our training function which can be found under <em>src/training.py</em>. This file allows to train some models for which we guarantee the compatibility with the rest of the package. The command is as follows:</p>
+<pre><code>python3 src/training.py [options]
+</code></pre>
+<ul>
+<li><code>-h</code> or <code>--help</code>: Show all options and exit.</li>
+<li><code>--seed</code>: Seed to use everywhere for reproducibility. Default: 42.</li>
+<li><code>--model-name</code>: Name of the model following project usage. Available models: "ae" and "vae". Default: "vae".</li>
+<li><code>--input-dim</code>: Dimension of the input images (after flattening). Default: 784.</li>
+<li><code>--hidden-dim</code>: Hidden dimension of the Auto Encoder. Default: 128.</li>
+<li><code>--encoding-dim</code>: Dimension of the encoded images. Default: 32.</li>
+<li><code>--optim-name</code>: Name of the optimizer following project usage. Available optimizers: "adam". Default: "adam".</li>
+<li><code>--lr</code>: Learning rate for the optimizer. Default: 0.001.</li>
+<li><code>--weight-decay</code>: Weight decay for the optimizer. Default: 0.0.</li>
+<li><code>--data-dir</code>: Data directory. Default: "data".</li>
+<li><code>--batch-suze</code>: Training atch size. Default: 256.</li>
+<li><code>--epochs</code>: Number of training epochs. Default: 10.</li>
+<li><code>--noise</code>: Proportion of pixels set to zero during training. Default: 0.0.</li>
+<li><code>--save</code>: If True, will save the last checkpoint of the model. Default: True.</li>
+<li><code>--model-dir</code>: Checkpoints directory. Default: "models".</li>
+</ul>
+<p>Example: We want to train a Variational Auto Encoder on MNIST, with all default parameters. We will train it for 20 epochs.</p>
+<pre><code class="language-bash">~ python3 src/training.py --model-name vae --epochs 20
+Running on cuda.
+Epoch 20/20; Train loss:  110.5803; Test loss:  109.8359: 100%|██████████████████████████| 20/20 [02:07&lt;00:00,  6.38s/it]
+</code></pre>
+<p><em>Note</em>: You can also train other Auto Encoder architectures with our training loop. You might also add a <code>--noise</code> argument to train more robust Auto Encoders (noise will be added during training, at random).</p>
+<h3 id="data-imputation">Data imputation</h3>
+<p>Once you have trained a Variational Auto Encoder, you can use our package to perform data imputation using different sampling procedures which can be found under <em>src/sampling</em>.</p>
+<p>Another file named <em>src/imputation.py</em> allows to compare the reconstruction of different sampling procedures. The command is as follows:</p>
+<pre><code>python3 src/imputation.py [options]
+</code></pre>
+<ul>
+<li><code>-h</code> or <code>--help</code>: Show all options and exit.</li>
+<li><code>--seed</code>: Seed to use everywhere for reproducibility. Default: 42.</li>
+<li><code>--action</code>: Action to perform. If "mar", pixels are set as missing at random. If "half", upper half of the image is set as missing. Proportion of missing pixels is set using the <code>--noise</code> argument. Available actions: "mar" and "half". Default: "mar".</li>
+<li><code>--input-dim</code>: Dimension of the input images (after flattening). Default: 784.</li>
+<li><code>--hidden-dim</code>: Hidden dimension in the Auto Encoder. Default: 128.</li>
+<li><code>--encoding-dim</code>: Dimension of the encoded images. Default: 32.</li>
+<li><code>--data-dir</code>: Data directory. Default: "data".</li>
+<li><code>--model-dir</code>: Checkpoints directory. Default: "models".</li>
+<li><code>--nb-images</code>: Number of images to plot. Default: 10.</li>
+<li><code>--noise</code>: Proportion of pixels set to zero in the noisy images. Default: 0.2.</li>
+<li><code>--sampling-names</code>: Choose sampling names. Available sampling procedures: "simple", "gibbs", "mhwg", "ite_tree" and "ite_ridge". Default: "gibbs mhwg".</li>
+<li><code>--gibbs-iter</code>: Number of pseudo-Gibbs sampling iterations. Default: 2000.</li>
+<li><code>--mhwg-iter</code> : Number of Metropolis-Hastings within Gibbs iterations. Default: 2000.</li>
+<li><code>--mhwg-gibbs</code>: Number of pseudo-Gibbs sampling during the initialization of the Metropolis-Hastings within Gibbs sampling. Default: 10.</li>
+<li><code>--result-dir</code>: Plots directory. Default: "results".</li>
+</ul>
+<p>Example: First, we would like to compare the ability of reconstructing original images for the Variational Auto Encoder. For this, we use the trick of setting the <code>--noise</code> argument to zero. Indeed, this will run a complete reconstruction of the image.</p>
+<pre><code class="language-bash">~ python3 src/imputation.py --noise 0 --sampling-names simple
+Running on cuda.
+Figures saved under results/mar_0.00_simple_[loss,f1,img].png.
+</code></pre>
+<p>Then, we can compare different sampling procedures for data imputation. Missing pixels are chosen at random with <code>--action mar</code> with a proportion of 50%. We should compare different strategies: Single pass sampling, pseudo-Gibbs sampling and Metropolis-Hastings within Gibbs sampling.</p>
+<pre><code class="language-bash">~ python3 src/imputation.py --action mar --noise 0.5 --sampling-names simple gibbs mhwg
+Running on cuda.
+100%|██████████████████████████| 20000/2000 [00:01&lt;00:00, 400.46it/s]
+100%|██████████████████████████| 10/10 [00:00&lt;00:00, 400.96it/s]
+100%|██████████████████████████| 20000/2000 [00:06&lt;00:00, 200.42it/s]
+Figures saved under results/mar_0.60_simple_gibbs_mhwg_[loss,f1,img].png.
+</code></pre>
+<p>Finally, we can compare again the different sampling strategies. However, this time missing pixels are chosen as the 50% upper half of pixels.</p>
+<pre><code class="language-bash">~ python3 src/imputation.py --action half --noise 0.5 --sampling-names simple gibbs mhwg
+Running on cuda.
+100%|██████████████████████████| 20000/2000 [00:01&lt;00:00, 400.46it/s]
+100%|██████████████████████████| 10/10 [00:00&lt;00:00, 400.96it/s]
+100%|██████████████████████████| 20000/2000 [00:06&lt;00:00, 200.42it/s]
+Figures saved under results/half_0.60_simple_gibbs_mhwg_[loss,f1,img].png.
+</code></pre>
+<h2 id="documentation">Documentation</h2>
+<p>A complete documentation is available in the <em>doc/src/</em> folder. If it is not
+generated, you can run from the root folder:</p>
+<pre><code class="language-bash">pip3 install pdoc3
+python3 -m pdoc -o doc/ --html --config latex_math=True --force src/
+</code></pre>
+<p>Then, open <em>doc/src/index.html</em> in your browser and follow the guide!</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Source code for our study of the paper *Leveraging the Exact Likelihood of Deep Latent
+Variable Models* by Pierre-Alexandre Mattei and Jes Frellsen.
+
+..include:: ../README.md
+&#34;&#34;&#34;
+
+
+import os
+import sys
+
+
+SRC_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(SRC_PATH)  # trick to make pdoc3 understand that this is the package src folder</code></pre>
+</details>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="src.imputation" href="imputation.html">src.imputation</a></code></dt>
+<dd>
+<div class="desc"><p>Main file to use Variational Auto Encoder for data imputation.</p></div>
+</dd>
+<dt><code class="name"><a title="src.nn" href="nn/index.html">src.nn</a></code></dt>
+<dd>
+<div class="desc"><p>Auto Encoder architectures.</p></div>
+</dd>
+<dt><code class="name"><a title="src.sampling" href="sampling/index.html">src.sampling</a></code></dt>
+<dd>
+<div class="desc"><p>Sampling techniques for data imputation.</p></div>
+</dd>
+<dt><code class="name"><a title="src.training" href="training.html">src.training</a></code></dt>
+<dd>
+<div class="desc"><p>Main file to train Auto Encoders.</p></div>
+</dd>
+<dt><code class="name"><a title="src.utils" href="utils.html">src.utils</a></code></dt>
+<dd>
+<div class="desc"><p>Gather utilitary functions for randomness control and parameters checking.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="src.imputation" href="imputation.html">src.imputation</a></code></li>
+<li><code><a title="src.nn" href="nn/index.html">src.nn</a></code></li>
+<li><code><a title="src.sampling" href="sampling/index.html">src.sampling</a></code></li>
+<li><code><a title="src.training" href="training.html">src.training</a></code></li>
+<li><code><a title="src.utils" href="utils.html">src.utils</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

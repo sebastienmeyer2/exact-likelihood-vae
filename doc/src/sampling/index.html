@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.sampling API documentation</title>
+<meta name="description" content="Sampling techniques for data imputation." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.sampling</code></h1>
+</header>
+<section id="section-intro">
+<p>Sampling techniques for data imputation.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Sampling techniques for data imputation.&#34;&#34;&#34;
+
+
+from sampling.single_pass import single_pass_sampling
+from sampling.pseudo_gibbs import pseudo_gibbs_sampling
+from sampling.metropolis_hastings_w_gibbs import metropolis_hastings_w_gibbs_sampling
+from sampling.iterative import iterative_imputing
+
+
+__all__ = [
+    &#34;single_pass_sampling&#34;,
+    &#34;pseudo_gibbs_sampling&#34;,
+    &#34;metropolis_hastings_w_gibbs_sampling&#34;,
+    &#34;iterative_imputing&#34;
+]</code></pre>
+</details>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="src.sampling.iterative" href="iterative.html">src.sampling.iterative</a></code></dt>
+<dd>
+<div class="desc"><p>Iterative Imputing data imputation technique.</p></div>
+</dd>
+<dt><code class="name"><a title="src.sampling.metropolis_hastings_w_gibbs" href="metropolis_hastings_w_gibbs.html">src.sampling.metropolis_hastings_w_gibbs</a></code></dt>
+<dd>
+<div class="desc"><p>Metropolis-Hasting within Gibbs technique for data imputation …</p></div>
+</dd>
+<dt><code class="name"><a title="src.sampling.pseudo_gibbs" href="pseudo_gibbs.html">src.sampling.pseudo_gibbs</a></code></dt>
+<dd>
+<div class="desc"><p>Pseudo-Gibbs sampling technique for data imputation …</p></div>
+</dd>
+<dt><code class="name"><a title="src.sampling.single_pass" href="single_pass.html">src.sampling.single_pass</a></code></dt>
+<dd>
+<div class="desc"><p>Single pass sampling technique for data imputation.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="src.sampling.iterative_imputing"><code class="name flex">
+<span>def <span class="ident">iterative_imputing</span></span>(<span>data: torch.Tensor, noisy_data: torch.Tensor, indices: torch.Tensor, device: str, seed: int = 42, estimator_name: str = 'tree', maxiter: int = 10) ‑> Tuple[List[torch.Tensor], List[float], List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sample missing pixels using iterative imputing.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>True data.</dd>
+<dt><strong><code>noisy_data</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>Initial tensor containing missing values.</dd>
+<dt><strong><code>indices</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>Indices of missing values.</dd>
+<dt><strong><code>device</code></strong> :&ensp;<code>str</code></dt>
+<dd>Device of the model and data.</dd>
+<dt><strong><code>seed</code></strong> :&ensp;<code>int</code>, default=<code>42</code></dt>
+<dd>Seed to use everywhere for reproducibility.</dd>
+<dt><strong><code>estimator_name</code></strong> :&ensp;<code>{"tree", "ridge"}</code>, default=<code>"tree"</code></dt>
+<dd>If "tree", will use a random forest regressor as estimator. If "ridge", will use a bayesian
+ridge linear regressor as estimator.</dd>
+<dt><strong><code>maxiter</code></strong> :&ensp;<code>int</code>, default=<code>10</code></dt>
+<dd>Number of iterative imputing iterations.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>x_list</code></strong> :&ensp;<code>list</code> of <code>torch.Tensor</code></dt>
+<dd>All sampled tensors.</dd>
+<dt><strong><code>loss_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>All losses.</dd>
+<dt><strong><code>f1_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>All f1-scores.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If <strong>estimator_name</strong> is not supported.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@torch.no_grad()
+def iterative_imputing(
+    data: Tensor, noisy_data: Tensor, indices: Tensor, device: str, seed: int = 42,
+    estimator_name: str = &#34;tree&#34;, maxiter: int = 10
+) -&gt; Tuple[List[Tensor], List[float], List[float]]:
+    &#34;&#34;&#34;Sample missing pixels using iterative imputing.
+
+    Parameters
+    ----------
+    data : torch.Tensor
+        True data.
+
+    noisy_data : torch.Tensor
+        Initial tensor containing missing values.
+
+    indices : torch.Tensor
+        Indices of missing values.
+
+    device : str
+        Device of the model and data.
+
+    seed : int, default=42
+        Seed to use everywhere for reproducibility.
+
+    estimator_name : {&#34;tree&#34;, &#34;ridge&#34;}, default=&#34;tree&#34;
+        If &#34;tree&#34;, will use a random forest regressor as estimator. If &#34;ridge&#34;, will use a bayesian
+        ridge linear regressor as estimator.
+
+    maxiter : int, default=10
+        Number of iterative imputing iterations.
+
+    Returns
+    -------
+    x_list : list of torch.Tensor
+        All sampled tensors.
+
+    loss_list : list of float
+        All losses.
+
+    f1_list : list of float
+        All f1-scores.
+
+    Raises
+    ------
+    ValueError
+        If **estimator_name** is not supported.
+    &#34;&#34;&#34;
+    # Iterative Imputer
+    if estimator_name == &#34;tree&#34;:
+        estimator = ExtraTreesRegressor(random_state=seed)
+    elif estimator_name == &#34;ridge&#34;:
+        estimator = BayesianRidge()
+    else:
+        err_msg = f&#34;Unsupported estimator name {estimator_name}.&#34;
+        err_msg += &#34;&#34;&#34;Choose from &#34;tree&#34; and &#34;ridge&#34;.&#34;&#34;&#34;
+        raise ValueError(err_msg)
+    ite_imp = IterativeImputer(estimator=estimator, max_iter=maxiter, random_state=seed, verbose=2)
+
+    # Evaluation metrics
+    criterion = MSELoss()
+    loss_list = []
+
+    f1_data = data.detach().clone().cpu().numpy()
+    f1_data[f1_data &lt; 0.5] = 0
+    f1_data[f1_data &gt; 0.5] = 1
+    f1_data = f1_data.astype(int)
+    f1_list = []
+
+    # Initialize algorithm
+    x_nan = noisy_data.detach().clone().cpu().numpy()
+    indices_nan = indices.detach().clone().cpu().numpy()
+    x_nan[indices_nan] = np.nan
+    x_nan[0, np.all(np.isnan(x_nan), axis=0)] = 0  # does not work when whole column is nan
+    x_list = torch.zeros((1, *noisy_data.shape))
+
+    # Run algorithm
+    decoded = ite_imp.fit_transform(x_nan)
+    x = torch.Tensor(decoded).to(device)
+
+    # Log x
+    x_list[0] = x.detach().clone()
+
+    # Log L2 loss
+    loss = criterion(x, data)
+    loss_list.append(loss.data.item())
+
+    # Log F1-score
+    f1_x = x.detach().clone().cpu().numpy()
+    f1_x[f1_x &lt; 0.5] = 0
+    f1_x[f1_x &gt; 0.5] = 1
+    f1_x = f1_x.astype(int)
+    f1_list.append(f1_score(f1_data.flatten(), f1_x.flatten()))
+
+    return x_list, loss_list, f1_list</code></pre>
+</details>
+</dd>
+<dt id="src.sampling.metropolis_hastings_w_gibbs_sampling"><code class="name flex">
+<span>def <span class="ident">metropolis_hastings_w_gibbs_sampling</span></span>(<span>model: torch.nn.modules.module.Module, data: torch.Tensor, noisy_data: torch.Tensor, indices: torch.Tensor, device: str, mhwg_iter: int = 2000, mhwg_gibbs: int = 10) ‑> Tuple[List[torch.Tensor], List[float], List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sample missing pixels via Metropolis-Hastings within Gibbs sampling.</p>
+<p>In order to use this function with your own Variational Auto Encoder, it will need to implement
+<em>encode</em> which maps data onto mean and logarithm and variance, <em>sample</em> which samples from
+normal distribution and <em>decode</em> which brings samples back to data.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model</code></strong> :&ensp;<code>torch.Module</code></dt>
+<dd>A Variational Auto Encoder instance.</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>True data.</dd>
+<dt><strong><code>noisy_data</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>Initial tensor containing missing values.</dd>
+<dt><strong><code>indices</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>Indices of missing values.</dd>
+<dt><strong><code>device</code></strong> :&ensp;<code>str</code></dt>
+<dd>Device of the model and data.</dd>
+<dt><strong><code>mhwg_iter</code></strong> :&ensp;<code>int</code>, default=<code>2000</code></dt>
+<dd>Number of Metropolis-Hastings within Gibbs iterations.</dd>
+<dt><strong><code>mhwg_gibbs</code></strong> :&ensp;<code>int</code>, default=<code>10</code></dt>
+<dd>Number of pseudo-Gibbs sampling during the initialization of the Metropolis-Hastings within
+Gibbs sampling.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>x_list</code></strong> :&ensp;<code>list</code> of <code>torch.Tensor</code></dt>
+<dd>All sampled tensors except burn-in.</dd>
+<dt><strong><code>loss_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>All losses including burn-in.</dd>
+<dt><strong><code>f1_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>All f1-scores including burn-in.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@torch.no_grad()
+def metropolis_hastings_w_gibbs_sampling(
+    model: Module, data: Tensor, noisy_data: Tensor, indices: Tensor, device: str,
+    mhwg_iter: int = 2000, mhwg_gibbs: int = 10
+) -&gt; Tuple[List[Tensor], List[float], List[float]]:
+    &#34;&#34;&#34;Sample missing pixels via Metropolis-Hastings within Gibbs sampling.
+
+    In order to use this function with your own Variational Auto Encoder, it will need to implement
+    *encode* which maps data onto mean and logarithm and variance, *sample* which samples from
+    normal distribution and *decode* which brings samples back to data.
+
+    Parameters
+    ----------
+    model : torch.Module
+        A Variational Auto Encoder instance.
+
+    data : torch.Tensor
+        True data.
+
+    noisy_data : torch.Tensor
+        Initial tensor containing missing values.
+
+    indices : torch.Tensor
+        Indices of missing values.
+
+    device : str
+        Device of the model and data.
+
+    mhwg_iter : int, default=2000
+        Number of Metropolis-Hastings within Gibbs iterations.
+
+    mhwg_gibbs: int, default=10
+        Number of pseudo-Gibbs sampling during the initialization of the Metropolis-Hastings within
+        Gibbs sampling.
+
+    Returns
+    -------
+    x_list : list of torch.Tensor
+        All sampled tensors except burn-in.
+
+    loss_list : list of float
+        All losses including burn-in.
+
+    f1_list : list of float
+        All f1-scores including burn-in.
+    &#34;&#34;&#34;
+    # Evaluation metrics
+    criterion = MSELoss()
+    loss_list = []
+
+    f1_data = data.detach().clone().cpu().numpy()
+    f1_data[f1_data &lt; 0.5] = 0
+    f1_data[f1_data &gt; 0.5] = 1
+    f1_data = f1_data.astype(int)
+    f1_list = []
+
+    # The authors advise to start with a few iterations of pseudo-Gibbs sampling
+    if mhwg_gibbs &gt; 0:
+        noisy_data_list, loss_list, f1_list = pseudo_gibbs_sampling(
+            model, data, noisy_data, indices, device, gibbs_iter=mhwg_gibbs
+        )
+        noisy_data = noisy_data_list.mean(dim=0)
+
+    # Initialize algorithm
+    x = noisy_data.detach().clone()  # x_0
+
+    mean, logvar = model.encode(x)
+    z = model.sample(mean, logvar)  # z_0
+    decoded_z = model.decode(z)  # decoded from z_0
+
+    x_list = torch.zeros((mhwg_gibbs+mhwg_iter, *x.shape)).to(device)
+    if mhwg_gibbs &gt; 0:
+        x_list[:mhwg_gibbs] = noisy_data_list
+
+    # Initialize standard normal
+    nb_images = z.shape[0]
+    encoding_dim = z.shape[-1]
+
+    loc = torch.zeros(encoding_dim).to(device)
+    covariance = torch.eye(encoding_dim).to(device)
+    norm = MultivariateNormal(loc, covariance)
+
+    for tt in tqdm(range(mhwg_iter)):
+
+        # New proposal z_hat and corresponding decoded from z_hat
+        mean, logvar = model.encode(x)
+        z_hat = model.sample(mean, logvar)
+
+        decoded_z_hat = model.decode(z_hat)
+
+        # Acceptance-Rejection for z_hat
+        log_prior_z_hat = norm.log_prob(z_hat)
+        log_prior_z = norm.log_prob(z)
+
+        loc_z_hat = mean
+        covariance_z_hat = torch.stack(
+            [logvar[i].exp() * torch.eye(encoding_dim).to(device) for i in range(nb_images)],
+            dim=0
+        )
+        norm_z_hat = MultivariateNormal(loc_z_hat, covariance_z_hat)
+
+        log_psi_z = norm_z_hat.log_prob(z)
+        log_psi_z_hat = norm_z_hat.log_prob(z_hat)
+
+        log_phi_z = F.binary_cross_entropy(decoded_z, x)
+        log_phi_z_hat = F.binary_cross_entropy(decoded_z_hat, x)
+
+        num = log_prior_z_hat + log_phi_z_hat + log_psi_z
+        denom = log_prior_z + log_phi_z + log_psi_z_hat
+        log_rho = num - denom
+
+        # Sample uniform for each image
+        uniform = torch.zeros(nb_images).uniform_().to(device)
+        accepted_images = uniform &lt; log_rho
+
+        # Update images where uniform passes
+        empty_indices = torch.zeros_like(indices)
+        accepted_indices = indices.detach().clone()
+        accepted_indices[~accepted_images] = empty_indices[~accepted_images]
+        x[accepted_indices] = decoded_z_hat[accepted_indices].detach().clone()  # x
+
+        z[accepted_images] = z_hat[accepted_images].detach().clone()  # z
+        decoded_z = model.decode(z)  # decoded from z
+
+        # Log x
+        x_list[tt] = x.detach().clone()
+
+        # Log L2 loss
+        loss = criterion(x, data)
+        loss_list.append(loss.data.item())
+
+        # Log F1-score
+        f1_x = x.detach().clone().cpu().numpy()
+        f1_x[f1_x &lt; 0.5] = 0
+        f1_x[f1_x &gt; 0.5] = 1
+        f1_x = f1_x.astype(int)
+        f1_list.append(f1_score(f1_data.flatten(), f1_x.flatten()))
+
+    return x_list, loss_list, f1_list</code></pre>
+</details>
+</dd>
+<dt id="src.sampling.pseudo_gibbs_sampling"><code class="name flex">
+<span>def <span class="ident">pseudo_gibbs_sampling</span></span>(<span>model: torch.nn.modules.module.Module, data: torch.Tensor, noisy_data: torch.Tensor, indices: torch.Tensor, device: str, gibbs_iter: int = 2000) ‑> Tuple[List[torch.Tensor], List[float], List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sample missing pixels via pseudo-Gibbs sampling.</p>
+<p>In order to use this function with your own Variational Auto Encoder, it will need to implement
+<em>encode</em> which maps data onto mean and logarithm and variance, <em>sample</em> which samples from
+normal distribution and <em>decode</em> which brings samples back to data.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model</code></strong> :&ensp;<code>torch.Module</code></dt>
+<dd>A Variational Auto Encoder instance.</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>True data.</dd>
+<dt><strong><code>noisy_data</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>Initial tensor containing missing values.</dd>
+<dt><strong><code>indices</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>Indices of missing values.</dd>
+<dt><strong><code>device</code></strong> :&ensp;<code>str</code></dt>
+<dd>Device of the model and data.</dd>
+<dt><strong><code>gibbs_iter</code></strong> :&ensp;<code>int</code>, default=<code>2000</code></dt>
+<dd>Number of pseudo-Gibbs sampling iterations.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>x_list</code></strong> :&ensp;<code>list</code> of <code>torch.Tensor</code></dt>
+<dd>All sampled tensors except burn-in.</dd>
+<dt><strong><code>loss_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>All losses including burn-in.</dd>
+<dt><strong><code>f1_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>All f1-scores including burn-in.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@torch.no_grad()
+def pseudo_gibbs_sampling(
+    model: Module, data: Tensor, noisy_data: Tensor, indices: Tensor, device: str,
+    gibbs_iter: int = 2000
+) -&gt; Tuple[List[Tensor], List[float], List[float]]:
+    &#34;&#34;&#34;Sample missing pixels via pseudo-Gibbs sampling.
+
+    In order to use this function with your own Variational Auto Encoder, it will need to implement
+    *encode* which maps data onto mean and logarithm and variance, *sample* which samples from
+    normal distribution and *decode* which brings samples back to data.
+
+    Parameters
+    ----------
+    model : torch.Module
+        A Variational Auto Encoder instance.
+
+    data : torch.Tensor
+        True data.
+
+    noisy_data : torch.Tensor
+        Initial tensor containing missing values.
+
+    indices : torch.Tensor
+        Indices of missing values.
+
+    device : str
+        Device of the model and data.
+
+    gibbs_iter : int, default=2000
+        Number of pseudo-Gibbs sampling iterations.
+
+    Returns
+    -------
+    x_list : list of torch.Tensor
+        All sampled tensors except burn-in.
+
+    loss_list : list of float
+        All losses including burn-in.
+
+    f1_list : list of float
+        All f1-scores including burn-in.
+    &#34;&#34;&#34;
+    # Evaluation metrics
+    criterion = MSELoss()
+    loss_list = []
+
+    f1_data = data.clone().cpu().numpy()
+    f1_data[f1_data &lt; 0.5] = 0
+    f1_data[f1_data &gt; 0.5] = 1
+    f1_data = f1_data.astype(int)
+    f1_list = []
+
+    # Initialize algorithm
+    x = noisy_data.clone()  # x_0
+    x_list = torch.zeros((gibbs_iter, *x.shape)).to(device)
+
+    for tt in tqdm(range(gibbs_iter)):
+
+        # Sample encoding based on missing values
+        mean, logvar = model.encode(x)
+        samples = model.sample(mean, logvar)
+
+        # Sample missing values based on encoding
+        decoded = model.decode(samples)
+
+        x[indices] = decoded[indices]
+
+        # Log x
+        x_list[tt] = x.clone()
+
+        # Log L2 loss
+        loss = criterion(x, data)
+        loss_list.append(loss.data.item())
+
+        # Log F1-score
+        f1_x = x.clone().cpu().numpy()
+        f1_x[f1_x &lt; 0.5] = 0
+        f1_x[f1_x &gt; 0.5] = 1
+        f1_x = f1_x.astype(int)
+        f1_list.append(f1_score(f1_data.flatten(), f1_x.flatten()))
+
+    return x_list, loss_list, f1_list</code></pre>
+</details>
+</dd>
+<dt id="src.sampling.single_pass_sampling"><code class="name flex">
+<span>def <span class="ident">single_pass_sampling</span></span>(<span>model: torch.nn.modules.module.Module, data: torch.Tensor, noisy_data: torch.Tensor, indices: torch.Tensor, device: str) ‑> Tuple[List[torch.Tensor], List[float], List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sample missing pixels via pseudo-Gibbs sampling.</p>
+<p>In order to use this function with your own Variational Auto Encoder, it will need to implement
+<em>encode</em> which maps data onto mean and logarithm and variance, <em>sample</em> which samples from
+normal distribution and <em>decode</em> which brings samples back to data.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model</code></strong> :&ensp;<code>torch.Module</code></dt>
+<dd>A Variational Auto Encoder instance.</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>True data.</dd>
+<dt><strong><code>noisy_data</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>Initial tensor containing missing values.</dd>
+<dt><strong><code>indices</code></strong> :&ensp;<code>torch.Tensor</code></dt>
+<dd>Indices of missing values.</dd>
+<dt><strong><code>device</code></strong> :&ensp;<code>str</code></dt>
+<dd>Device of the model and data.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>x_list</code></strong> :&ensp;<code>list</code> of <code>torch.Tensor</code></dt>
+<dd>All sampled tensors except burn-in.</dd>
+<dt><strong><code>loss_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>All losses including burn-in.</dd>
+<dt><strong><code>f1_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>All f1-scores including burn-in.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@torch.no_grad()
+def single_pass_sampling(
+    model: Module, data: Tensor, noisy_data: Tensor, indices: Tensor, device: str
+) -&gt; Tuple[List[Tensor], List[float], List[float]]:
+    &#34;&#34;&#34;Sample missing pixels via pseudo-Gibbs sampling.
+
+    In order to use this function with your own Variational Auto Encoder, it will need to implement
+    *encode* which maps data onto mean and logarithm and variance, *sample* which samples from
+    normal distribution and *decode* which brings samples back to data.
+
+    Parameters
+    ----------
+    model : torch.Module
+        A Variational Auto Encoder instance.
+
+    data : torch.Tensor
+        True data.
+
+    noisy_data : torch.Tensor
+        Initial tensor containing missing values.
+
+    indices : torch.Tensor
+        Indices of missing values.
+
+    device : str
+        Device of the model and data.
+
+    Returns
+    -------
+    x_list : list of torch.Tensor
+        All sampled tensors except burn-in.
+
+    loss_list : list of float
+        All losses including burn-in.
+
+    f1_list : list of float
+        All f1-scores including burn-in.
+    &#34;&#34;&#34;
+    # Evaluation metrics
+    criterion = MSELoss()
+    loss_list = []
+
+    f1_data = data.clone().cpu().numpy()
+    f1_data[f1_data &lt; 0.5] = 0
+    f1_data[f1_data &gt; 0.5] = 1
+    f1_data = f1_data.astype(int)
+    f1_list = []
+
+    # Initialize algorithm
+    x = noisy_data.clone()  # x_0
+    x_list = torch.zeros((1, *x.shape)).to(device)
+
+    # Sample encoding based on missing values
+    mean, logvar = model.encode(x)
+    samples = model.sample(mean, logvar)
+
+    # Sample missing values based on encoding
+    decoded = model.decode(samples)
+
+    x[indices] = decoded[indices]
+
+    # Log x
+    x_list[0] = x.clone()
+
+    # Log L2 loss
+    loss = criterion(x, data)
+    loss_list.append(loss.data.item())
+
+    # Log F1-score
+    f1_x = x.clone().cpu().numpy()
+    f1_x[f1_x &lt; 0.5] = 0
+    f1_x[f1_x &gt; 0.5] = 1
+    f1_x = f1_x.astype(int)
+    f1_list.append(f1_score(f1_data.flatten(), f1_x.flatten()))
+
+    return x_list, loss_list, f1_list</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src" href="../index.html">src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="src.sampling.iterative" href="iterative.html">src.sampling.iterative</a></code></li>
+<li><code><a title="src.sampling.metropolis_hastings_w_gibbs" href="metropolis_hastings_w_gibbs.html">src.sampling.metropolis_hastings_w_gibbs</a></code></li>
+<li><code><a title="src.sampling.pseudo_gibbs" href="pseudo_gibbs.html">src.sampling.pseudo_gibbs</a></code></li>
+<li><code><a title="src.sampling.single_pass" href="single_pass.html">src.sampling.single_pass</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="src.sampling.iterative_imputing" href="#src.sampling.iterative_imputing">iterative_imputing</a></code></li>
+<li><code><a title="src.sampling.metropolis_hastings_w_gibbs_sampling" href="#src.sampling.metropolis_hastings_w_gibbs_sampling">metropolis_hastings_w_gibbs_sampling</a></code></li>
+<li><code><a title="src.sampling.pseudo_gibbs_sampling" href="#src.sampling.pseudo_gibbs_sampling">pseudo_gibbs_sampling</a></code></li>
+<li><code><a title="src.sampling.single_pass_sampling" href="#src.sampling.single_pass_sampling">single_pass_sampling</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

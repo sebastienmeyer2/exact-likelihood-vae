@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>src.training API documentation</title>
+<meta name="description" content="Main file to train Auto Encoders." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML" integrity="sha256-kZafAc6mZvK3W3v1pHOcUix30OHQN6pU/NO2oFkqZVw=" crossorigin></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.training</code></h1>
+</header>
+<section id="section-intro">
+<p>Main file to train Auto Encoders.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Main file to train Auto Encoders.&#34;&#34;&#34;
+
+
+import os
+
+from typing import List, Tuple
+
+import argparse
+
+import torch
+from torch.utils.data import DataLoader
+
+from tqdm import tqdm
+
+
+from utils import str2bool, set_seed, init_model, init_criterion, init_optim, init_data
+
+
+def train(
+    seed: int = 42,
+    model_name: str = &#34;vae&#34;,
+    input_dim: int = 784,
+    hidden_dim: int = 128,
+    encoding_dim: int = 32,
+    optim_name: str = &#34;adam&#34;,
+    lr: float = 1e-3,
+    weight_decay: float = 0.,
+    data_dir: str = &#34;data&#34;,
+    batch_size: int = 256,
+    epochs: int = 10,
+    noise: float = 0.,
+    save: bool = True,
+    model_dir: str = &#34;models&#34;
+) -&gt; Tuple[List[float], List[float]]:
+    &#34;&#34;&#34;Train an auto encoder.
+
+    Parameters
+    ----------
+    seed : int, default=42
+        Seed to use everywhere for reproducibility.
+
+    model_name : {&#34;ae&#34;, &#34;vae&#34;}, default=&#34;vae&#34;
+        Name of the model following project usage.
+
+    input_dim : int, default=784
+        Input dimension.
+
+    hidden_dim : int, default=128
+        Hidden dimension.
+
+    encoding_dim : int, default=32
+        Encoding dimension.
+
+    optim_name : {&#34;adam&#34;}
+        Name of the optimizer following project usage.
+
+    lr : float, default=0.001
+        Learning rate for the optimizer.
+
+    weight_decay : float, default=0.0
+        Weight decay for the optimizer.
+
+    data_dir : str, default=&#34;data&#34;
+        Data directory.
+
+    batch_size : int, default=256
+        Batch size.
+
+    epochs : int, default=10
+        Number of training epochs.
+
+    noise : float, default=0.2
+        Proportion of pixels set to zero in the noisy images.
+
+    save : bool, default=True
+        If True, will save the checkpoint of the model in the **model_dir** directory.
+
+    model_dir : str, default=&#34;models&#34;
+        Checkpoints directory.
+
+    Returns
+    -------
+    train_loss_list : list of float
+        List of training losses.
+
+    test_loss_list : list of float
+        List of test losses.
+    &#34;&#34;&#34;
+    # Fix randomness
+    set_seed(seed)
+
+    # Find the device
+    device = &#34;cuda&#34; if torch.cuda.is_available() else &#34;cpu&#34;
+    print(f&#34;Running on {device}.&#34;)
+
+    # Create the model
+    model = init_model(
+        model_name=model_name, input_dim=input_dim, hidden_dim=hidden_dim,
+        encoding_dim=encoding_dim
+    )
+
+    model.to(device)
+
+    criterion = init_criterion(model_name=model_name)
+
+    optimizer = init_optim(model, optim_name=optim_name, lr=lr, weight_decay=weight_decay)
+
+    # Load data
+    train_set, test_set = init_data(data_dir=data_dir)
+
+    train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
+    test_loader = DataLoader(test_set, batch_size=10, shuffle=False)
+
+    n_train = len(train_loader.dataset)
+    n_test = len(test_loader.dataset)
+
+    # Log lists
+    train_loss_list = []
+    train_loss = 0.
+
+    test_loss_list = []
+    test_loss = 0.
+
+    pbar = tqdm(range(epochs), desc=f&#34;Epoch {0}/{epochs}&#34;)
+
+    for epoch in range(epochs):
+
+        model.train()
+
+        train_loss = 0.
+
+        for _, (data, _) in enumerate(train_loader):
+
+            data = data.view([-1, input_dim]).to(device)
+
+            # Add noise
+            if noise &gt; 0.:
+
+                indices = torch.zeros_like(data).uniform_() &lt; noise
+                noisy_data = data.clone().to(device)
+                noisy_data[indices] = 0
+
+            # Set zero gradients
+            optimizer.zero_grad()
+
+            # Forward pass
+            if noise &gt; 0.:
+                output = model(noisy_data)
+            else:
+                output = model(data)
+
+            loss = criterion(output, data)
+
+            # Backward pass
+            loss.backward()
+
+            optimizer.step()
+
+            # Update loss
+            train_loss += loss.data.item()
+
+        pbar_msg = []
+
+        # Log training metrics
+        train_loss /= n_train
+        train_loss_list.append(train_loss)
+
+        pbar_msg.append(f&#34;Epoch {epoch+1}/{epochs}&#34;)
+        pbar_msg.append(f&#34;; Train loss: {train_loss: .4f}&#34;)
+
+        model.eval()
+
+        # Evaluation
+        test_loss = 0.
+
+        for _, (data, _) in enumerate(test_loader):
+
+            data = data.view([-1, input_dim]).to(device)
+
+            # Forward pass
+            output = model(data)
+
+            test_loss += criterion(output, data).data.item()
+
+        test_loss /= n_test
+        test_loss_list.append(test_loss)
+
+        pbar_msg.append(f&#34;; Test loss: {test_loss: .4f}&#34;)
+
+        # Update progress bar
+        pbar_desc = &#34;&#34;.join(pbar_msg)
+        pbar.set_description(pbar_desc, refresh=False)
+        pbar.update()
+
+    pbar.close()
+
+    # Save model
+    if save:
+
+        if not os.path.exists(model_dir):
+            os.makedirs(model_dir)
+
+        model_filename = f&#34;{model_dir}/{model_name}.pth&#34;
+        torch.save(model.state_dict(), model_filename)
+
+    return train_loss_list, test_loss_list
+
+
+if __name__ == &#34;__main__&#34;:
+
+    # Command lines
+    PARSER_DESC = &#34;Main file to train Auto Encoders.&#34;
+    PARSER = argparse.ArgumentParser(description=PARSER_DESC)
+
+    # Seed
+    PARSER.add_argument(
+        &#34;--seed&#34;,
+        default=42,
+        type=int,
+        help=&#34;&#34;&#34;
+             Seed to use everywhere for reproducibility. Default: 42.
+             &#34;&#34;&#34;
+    )
+
+    # Model
+    PARSER.add_argument(
+        &#34;--model-name&#34;,
+        default=&#34;vae&#34;,
+        type=str,
+        choices=[&#34;ae&#34;, &#34;vae&#34;],
+        help=&#34;&#34;&#34;
+             Name of the model following project usage. Available models: &#34;ae&#34; and &#34;vae&#34;.
+             Default: &#34;vae&#34;.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--input-dim&#34;,
+        default=784,
+        type=int,
+        help=&#34;&#34;&#34;
+             Dimension of the input images (after flattening). Default: 784.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--hidden-dim&#34;,
+        default=128,
+        type=int,
+        help=&#34;&#34;&#34;
+             Hidden dimension in the Auto Encoder. Default: 128.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--encoding-dim&#34;,
+        default=32,
+        type=int,
+        help=&#34;&#34;&#34;
+             Dimension of the embedding space. Default: 32.
+             &#34;&#34;&#34;
+    )
+
+    # Optimizer
+    PARSER.add_argument(
+        &#34;--optim-name&#34;,
+        default=&#34;adam&#34;,
+        type=str,
+        choices=[&#34;adam&#34;],
+        help=&#34;&#34;&#34;
+             Name of the optimizer following project usage. Available optimizers: &#34;adam&#34;.
+             Default: &#34;adam&#34;.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--lr&#34;,
+        default=0.001,
+        type=float,
+        help=&#34;&#34;&#34;
+             Learning rate for the optimizer. Default: 0.001.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--weight-decay&#34;,
+        default=0.,
+        type=float,
+        help=&#34;&#34;&#34;
+             Weight decay for the optimizer. Default: 0.0.
+             &#34;&#34;&#34;
+    )
+
+    # Training
+    PARSER.add_argument(
+        &#34;--data-dir&#34;,
+        default=&#34;data&#34;,
+        type=str,
+        help=&#34;&#34;&#34;
+             Data directory. Default: &#34;data&#34;.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--batch-size&#34;,
+        default=256,
+        type=int,
+        help=&#34;&#34;&#34;
+             Training batch size. Default: 256.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--epochs&#34;,
+        default=10,
+        type=int,
+        help=&#34;&#34;&#34;
+             Number of training epochs. Default: 10.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--noise&#34;,
+        default=0.0,
+        type=float,
+        help=&#34;&#34;&#34;
+             Proportion of pixels set to zero during training. Default: 0.0.
+             &#34;&#34;&#34;
+    )
+
+    # Saving
+    PARSER.add_argument(
+        &#34;--save&#34;,
+        default=&#34;True&#34;,
+        type=str,
+        help=&#34;&#34;&#34;
+             If True, will save the last checkpoint of the model. Default: True.
+             &#34;&#34;&#34;
+    )
+
+    PARSER.add_argument(
+        &#34;--model-dir&#34;,
+        default=&#34;models&#34;,
+        type=str,
+        help=&#34;&#34;&#34;
+             Checkpoints directory. Default: &#34;models&#34;.
+             &#34;&#34;&#34;
+    )
+
+    # End of command lines
+    ARGS = PARSER.parse_args()
+
+    # Run the gridsearch
+    train(
+            seed=ARGS.seed,
+            model_name=ARGS.model_name,
+            input_dim=ARGS.input_dim,
+            hidden_dim=ARGS.hidden_dim,
+            encoding_dim=ARGS.encoding_dim,
+            optim_name=ARGS.optim_name,
+            lr=ARGS.lr,
+            weight_decay=ARGS.weight_decay,
+            data_dir=ARGS.data_dir,
+            batch_size=ARGS.batch_size,
+            epochs=ARGS.epochs,
+            noise=ARGS.noise,
+            save=str2bool(ARGS.save),
+            model_dir=ARGS.model_dir,
+    )</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="src.training.train"><code class="name flex">
+<span>def <span class="ident">train</span></span>(<span>seed: int = 42, model_name: str = 'vae', input_dim: int = 784, hidden_dim: int = 128, encoding_dim: int = 32, optim_name: str = 'adam', lr: float = 0.001, weight_decay: float = 0.0, data_dir: str = 'data', batch_size: int = 256, epochs: int = 10, noise: float = 0.0, save: bool = True, model_dir: str = 'models') ‑> Tuple[List[float], List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Train an auto encoder.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>seed</code></strong> :&ensp;<code>int</code>, default=<code>42</code></dt>
+<dd>Seed to use everywhere for reproducibility.</dd>
+<dt><strong><code>model_name</code></strong> :&ensp;<code>{"ae", "vae"}</code>, default=<code>"vae"</code></dt>
+<dd>Name of the model following project usage.</dd>
+<dt><strong><code>input_dim</code></strong> :&ensp;<code>int</code>, default=<code>784</code></dt>
+<dd>Input dimension.</dd>
+<dt><strong><code>hidden_dim</code></strong> :&ensp;<code>int</code>, default=<code>128</code></dt>
+<dd>Hidden dimension.</dd>
+<dt><strong><code>encoding_dim</code></strong> :&ensp;<code>int</code>, default=<code>32</code></dt>
+<dd>Encoding dimension.</dd>
+<dt><strong><code>optim_name</code></strong> :&ensp;<code>{"adam"}</code></dt>
+<dd>Name of the optimizer following project usage.</dd>
+<dt><strong><code>lr</code></strong> :&ensp;<code>float</code>, default=<code>0.001</code></dt>
+<dd>Learning rate for the optimizer.</dd>
+<dt><strong><code>weight_decay</code></strong> :&ensp;<code>float</code>, default=<code>0.0</code></dt>
+<dd>Weight decay for the optimizer.</dd>
+<dt><strong><code>data_dir</code></strong> :&ensp;<code>str</code>, default=<code>"data"</code></dt>
+<dd>Data directory.</dd>
+<dt><strong><code>batch_size</code></strong> :&ensp;<code>int</code>, default=<code>256</code></dt>
+<dd>Batch size.</dd>
+<dt><strong><code>epochs</code></strong> :&ensp;<code>int</code>, default=<code>10</code></dt>
+<dd>Number of training epochs.</dd>
+<dt><strong><code>noise</code></strong> :&ensp;<code>float</code>, default=<code>0.2</code></dt>
+<dd>Proportion of pixels set to zero in the noisy images.</dd>
+<dt><strong><code>save</code></strong> :&ensp;<code>bool</code>, default=<code>True</code></dt>
+<dd>If True, will save the checkpoint of the model in the <strong>model_dir</strong> directory.</dd>
+<dt><strong><code>model_dir</code></strong> :&ensp;<code>str</code>, default=<code>"models"</code></dt>
+<dd>Checkpoints directory.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>train_loss_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>List of training losses.</dd>
+<dt><strong><code>test_loss_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>List of test losses.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train(
+    seed: int = 42,
+    model_name: str = &#34;vae&#34;,
+    input_dim: int = 784,
+    hidden_dim: int = 128,
+    encoding_dim: int = 32,
+    optim_name: str = &#34;adam&#34;,
+    lr: float = 1e-3,
+    weight_decay: float = 0.,
+    data_dir: str = &#34;data&#34;,
+    batch_size: int = 256,
+    epochs: int = 10,
+    noise: float = 0.,
+    save: bool = True,
+    model_dir: str = &#34;models&#34;
+) -&gt; Tuple[List[float], List[float]]:
+    &#34;&#34;&#34;Train an auto encoder.
+
+    Parameters
+    ----------
+    seed : int, default=42
+        Seed to use everywhere for reproducibility.
+
+    model_name : {&#34;ae&#34;, &#34;vae&#34;}, default=&#34;vae&#34;
+        Name of the model following project usage.
+
+    input_dim : int, default=784
+        Input dimension.
+
+    hidden_dim : int, default=128
+        Hidden dimension.
+
+    encoding_dim : int, default=32
+        Encoding dimension.
+
+    optim_name : {&#34;adam&#34;}
+        Name of the optimizer following project usage.
+
+    lr : float, default=0.001
+        Learning rate for the optimizer.
+
+    weight_decay : float, default=0.0
+        Weight decay for the optimizer.
+
+    data_dir : str, default=&#34;data&#34;
+        Data directory.
+
+    batch_size : int, default=256
+        Batch size.
+
+    epochs : int, default=10
+        Number of training epochs.
+
+    noise : float, default=0.2
+        Proportion of pixels set to zero in the noisy images.
+
+    save : bool, default=True
+        If True, will save the checkpoint of the model in the **model_dir** directory.
+
+    model_dir : str, default=&#34;models&#34;
+        Checkpoints directory.
+
+    Returns
+    -------
+    train_loss_list : list of float
+        List of training losses.
+
+    test_loss_list : list of float
+        List of test losses.
+    &#34;&#34;&#34;
+    # Fix randomness
+    set_seed(seed)
+
+    # Find the device
+    device = &#34;cuda&#34; if torch.cuda.is_available() else &#34;cpu&#34;
+    print(f&#34;Running on {device}.&#34;)
+
+    # Create the model
+    model = init_model(
+        model_name=model_name, input_dim=input_dim, hidden_dim=hidden_dim,
+        encoding_dim=encoding_dim
+    )
+
+    model.to(device)
+
+    criterion = init_criterion(model_name=model_name)
+
+    optimizer = init_optim(model, optim_name=optim_name, lr=lr, weight_decay=weight_decay)
+
+    # Load data
+    train_set, test_set = init_data(data_dir=data_dir)
+
+    train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
+    test_loader = DataLoader(test_set, batch_size=10, shuffle=False)
+
+    n_train = len(train_loader.dataset)
+    n_test = len(test_loader.dataset)
+
+    # Log lists
+    train_loss_list = []
+    train_loss = 0.
+
+    test_loss_list = []
+    test_loss = 0.
+
+    pbar = tqdm(range(epochs), desc=f&#34;Epoch {0}/{epochs}&#34;)
+
+    for epoch in range(epochs):
+
+        model.train()
+
+        train_loss = 0.
+
+        for _, (data, _) in enumerate(train_loader):
+
+            data = data.view([-1, input_dim]).to(device)
+
+            # Add noise
+            if noise &gt; 0.:
+
+                indices = torch.zeros_like(data).uniform_() &lt; noise
+                noisy_data = data.clone().to(device)
+                noisy_data[indices] = 0
+
+            # Set zero gradients
+            optimizer.zero_grad()
+
+            # Forward pass
+            if noise &gt; 0.:
+                output = model(noisy_data)
+            else:
+                output = model(data)
+
+            loss = criterion(output, data)
+
+            # Backward pass
+            loss.backward()
+
+            optimizer.step()
+
+            # Update loss
+            train_loss += loss.data.item()
+
+        pbar_msg = []
+
+        # Log training metrics
+        train_loss /= n_train
+        train_loss_list.append(train_loss)
+
+        pbar_msg.append(f&#34;Epoch {epoch+1}/{epochs}&#34;)
+        pbar_msg.append(f&#34;; Train loss: {train_loss: .4f}&#34;)
+
+        model.eval()
+
+        # Evaluation
+        test_loss = 0.
+
+        for _, (data, _) in enumerate(test_loader):
+
+            data = data.view([-1, input_dim]).to(device)
+
+            # Forward pass
+            output = model(data)
+
+            test_loss += criterion(output, data).data.item()
+
+        test_loss /= n_test
+        test_loss_list.append(test_loss)
+
+        pbar_msg.append(f&#34;; Test loss: {test_loss: .4f}&#34;)
+
+        # Update progress bar
+        pbar_desc = &#34;&#34;.join(pbar_msg)
+        pbar.set_description(pbar_desc, refresh=False)
+        pbar.update()
+
+    pbar.close()
+
+    # Save model
+    if save:
+
+        if not os.path.exists(model_dir):
+            os.makedirs(model_dir)
+
+        model_filename = f&#34;{model_dir}/{model_name}.pth&#34;
+        torch.save(model.state_dict(), model_filename)
+
+    return train_loss_list, test_loss_list</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src" href="index.html">src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="src.training.train" href="#src.training.train">train</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
